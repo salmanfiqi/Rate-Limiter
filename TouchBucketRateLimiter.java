@@ -1,23 +1,19 @@
-public class TocketBucketRateLimiter {
-    """
+public class TockenBucketRateLimiter {
+    /* 
     Initliaze
-    - tore token capacity
-    - current tokens being held
-    - how many tokens we add per second
-    - when we did last refund
-    """
+        - tore token capacity
+        - current tokens being held
+        - how many tokens we add per second
+    */
 
     private long capacity;
-
     private long tokens;
-
     private long refillRate;
-
     private long lastRefillTime;
 
-    public TocketBucketRateLimiter(long capacity, long refillRate) {
+    public TockenBucketRateLimiter(long capacity, long refillRate) {
         this.capacity = capacity;
-        this.tokens = tokens
+        this.tokens = capacity; // start tokens full
         this.refillRate = refillRate;
         this.lastRefillTime = System.currentTimeMillis();
     }
@@ -25,7 +21,7 @@ public class TocketBucketRateLimiter {
     // Try to use tockens
     // Return true if enough tokens
     // False if not
-    public boolean tryConsume(int tokensNeeded) {
+    public synchronized boolean tryConsume(int tokensNeeded) {
         refill();
 
         if (tokens >= tokensNeeded) {

@@ -1,3 +1,5 @@
+package com.ratelimiter;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("=== Rate Limiter Test ===\n");
